@@ -1,0 +1,10 @@
+<library path="lib/librgbd_throttle"> 
+
+  <class name="camera_compression/rgbd_throttle" 
+         type="camera_compression::RGBDThrottleNodelet" 
+         base_class_type="nodelet::Nodelet">
+    <description>
+      RGBD throttle+decimate nodelet
+    </description>
+  </class>
+</library>
