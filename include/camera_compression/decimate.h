@@ -16,7 +16,7 @@ cv::Mat decimate(const cv::Mat & image, int decimation)
 		{
 			if((image.type() == CV_32FC1 || image.type()==CV_16UC1))
 			{
-				ROS_ERROR_STREAM_COND(image.rows % decimation == 0 && image.cols % decimation == 0,
+				ROS_ERROR_STREAM_COND(image.rows % decimation != 0 || image.cols % decimation != 0,
 						"Decimation of depth images should be exact! (decimation=" << decimation << ", size=" << 
 						image.cols << "x" << image.rows );
 

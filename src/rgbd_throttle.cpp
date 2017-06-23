@@ -100,6 +100,12 @@ private:
 		NODELET_INFO("Decimation=%d", decimation_);
 		NODELET_INFO("Approximate time sync = %s", approxSync?"true":"false");
 
+    /* Note: if using the depth registered images, then the depth camera_info would be the same... should this be handled differently? 
+      TODO: Add reconfigure for rate/decimation
+            Replace synchronizers raw pointers with some sort of smart pointer
+            Investigate multithreaded nodehandles/multiple callback queues
+    */
+
 		if(approxSync)
 		{
 			approxSync_ = new message_filters::Synchronizer<MyApproxSyncPolicy>(MyApproxSyncPolicy(queueSize), image_sub_, image_depth_sub_, info_sub_, info_depth_sub_);
