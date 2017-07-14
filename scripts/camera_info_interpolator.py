@@ -23,9 +23,9 @@ class CamInfoInterpolator():
 
     self.camInfo = None
     
-    self.depthSub = rospy.Subscriber('camera/depth/image_raw', Image, self.depthCallback)
-    self.camInfoSub = rospy.Subscriber('camera/depth/camera_info', CameraInfo, self.camInfoCallback)
-    self.pub = rospy.Publisher('camera/depth/camera_info', CameraInfo, queue_size=10)
+    self.depthSub = rospy.Subscriber('image', Image, self.depthCallback)
+    self.camInfoSub = rospy.Subscriber('camera_info', CameraInfo, self.camInfoCallback)
+    self.pub = rospy.Publisher('camera_info', CameraInfo, queue_size=10)
 
     rospy.spin()
 
