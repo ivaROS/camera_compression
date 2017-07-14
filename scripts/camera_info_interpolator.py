@@ -12,13 +12,10 @@ class CamInfoInterpolator():
     
   def depthCallback(self, data):
     if self.camInfo:
-      if data.header.stamp > self.camInfo.header.stamp: #If the image is more recent than the last received CameraInfo message...
-        print "image newer\n"
-        if data.height==self.camInfo.height and data.width==self.camInfo.width:
+      if data.header.stamp != self.camInfo.header.stamp: #If the image is more recent than the last received CameraInfo message...
+        if data.height==self.camInfo.height and data.width==self.camInfo.width: #As long as the CameraInfo's size still matches that of the image, it is likely still valid
           self.camInfo.header.stamp = data.header.stamp
           self.pub.publish(self.camInfo)
-      if data.header.stamp < self.camInfo.header.stamp:
-        print "info newer\n"
 
   def __init__(self):
     rospy.init_node('camera_info_interpolator')
