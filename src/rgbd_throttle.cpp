@@ -220,11 +220,11 @@ private:
 				info.P[6]/=float(decimation_); // cy
 				info.P[0]/=float(decimation_); // fx
 				info.P[5]/=float(decimation_); // fy
-				infoPub_.publish(info);
+				infoDepthPub_.publish(info);
 			}
 			else
 			{
-				infoPub_.publish(camInfo);
+				infoDepthPub_.publish(camInfo);
 			}
 			
 		}
