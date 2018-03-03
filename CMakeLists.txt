@@ -9,11 +9,19 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   message_filters
   nodelet
-  
+  geometry_msgs
+  std_msgs
+  tf
+  tf2
+  tf2_ros
 )
 
-catkin_package()
-
+catkin_package(
+  INCLUDE_DIRS 
+  LIBRARIES 
+  CATKIN_DEPENDS
+  DEPENDS 
+)
 
 include_directories(
   include
@@ -26,4 +34,13 @@ add_library(rgbd_throttle MODULE
 
 target_link_libraries(rgbd_throttle
 	${catkin_LIBRARIES}
+)
+
+
+add_executable(image_processing_timing
+  src/image_processing_timing.cpp
+)
+
+target_link_libraries(image_processing_timing
+  ${catkin_LIBRARIES}
 )
