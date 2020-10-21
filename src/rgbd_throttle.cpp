@@ -155,8 +155,13 @@ private:
 				cv_bridge::CvImage out;
 				out.header = imagePtr->header;
 				out.encoding = imagePtr->encoding;
+        ros::WallTime start=ros::WallTime::now();
 				out.image = decimate(imagePtr->image, decimation_);
+        ros::WallTime mid=ros::WallTime::now();
 				imagePub_.publish(out.toImageMsg());
+        ros::WallTime end=ros::WallTime::now();
+        
+        ROS_INFO_STREAM_NAMED("timing", "Decimating rgb: " << (mid-start).toSec()*1000 << "ms; creating image: " << (end-mid).toSec()*1000 << "ms");
 			}
 			else
 			{
@@ -167,12 +172,40 @@ private:
 		{
 			if(decimation_ > 1)
 			{
-				cv_bridge::CvImageConstPtr imagePtr = cv_bridge::toCvShare(imageDepth);
-				cv_bridge::CvImage out;
-				out.header = imagePtr->header;
-				out.encoding = imagePtr->encoding;
-				out.image = decimate(imagePtr->image, decimation_);
-				imageDepthPub_.publish(out.toImageMsg());
+// 				cv_bridge::CvImageConstPtr imagePtr = cv_bridge::toCvShare(imageDepth);
+// 				cv_bridge::CvImage out;
+// 				out.header = imagePtr->header;
+// 				out.encoding = imagePtr->encoding;
+//         ros::WallTime start=ros::WallTime::now();
+// 				out.image = decimate(imagePtr->image, decimation_);
+//         ros::WallTime mid=ros::WallTime::now();
+// 				imageDepthPub_.publish(out.toImageMsg());
+//         ros::WallTime end=ros::WallTime::now();
+//         
+//         ROS_INFO_STREAM_NAMED("timing", "Decimating depth: " << (mid-start).toSec()*1000 << "ms; creating image: " << (end-mid).toSec()*1000 << "ms");
+        {
+          ros::WallTime start=ros::WallTime::now();
+          sensor_msgs::Image::Ptr out_msg=decimate(imageDepth, decimation_);
+          ros::WallTime mid=ros::WallTime::now();
+          imageDepthPub_.publish(out_msg);
+          ros::WallTime end=ros::WallTime::now();
+          
+          ROS_INFO_STREAM_NAMED("timing", "Decimating depth1: " << (mid-start).toSec()*1000 << "ms; creating image: " << (end-mid).toSec()*1000 << "ms");
+        }
+        
+        {
+          cv_bridge::CvImageConstPtr imagePtr = cv_bridge::toCvShare(imageDepth);
+          cv_bridge::CvImage out;
+          out.header = imagePtr->header;
+          out.encoding = imagePtr->encoding;
+          ros::WallTime start=ros::WallTime::now();
+          out.image = decimate(imagePtr->image, decimation_);
+          ros::WallTime mid=ros::WallTime::now();
+          imageDepthPub_.publish(out.toImageMsg());
+          ros::WallTime end=ros::WallTime::now();
+          
+          ROS_INFO_STREAM_NAMED("timing", "Decimating depth2: " << (mid-start).toSec()*1000 << "ms; creating image: " << (end-mid).toSec()*1000 << "ms");
+        }
 			}
 			else
 			{

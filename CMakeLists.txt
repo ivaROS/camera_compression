@@ -36,6 +36,8 @@ target_link_libraries(rgbd_throttle
 	${catkin_LIBRARIES}
 )
 
+target_compile_options(rgbd_throttle PUBLIC -fopt-info-vec-optimized)
+
 
 add_executable(image_processing_timing
   src/image_processing_timing.cpp
