@@ -32,12 +32,21 @@ add_library(rgbd_throttle MODULE
 	src/rgbd_throttle.cpp
 )
 
+add_library(depth_throttle MODULE
+	src/depth_throttle.cpp
+)
+
 target_link_libraries(rgbd_throttle
+	${catkin_LIBRARIES}
+)
+
+target_link_libraries(depth_throttle
 	${catkin_LIBRARIES}
 )
 
 target_compile_options(rgbd_throttle PUBLIC -fopt-info-vec-optimized)
 
+target_compile_options(depth_throttle PUBLIC -fopt-info-vec-optimized)
 
 add_executable(image_processing_timing
   src/image_processing_timing.cpp

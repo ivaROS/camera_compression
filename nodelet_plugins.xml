@@ -8,3 +8,13 @@
     </description>
   </class>
 </library>
+  
+<library path="lib/libdepth_throttle"> 
+  <class name="camera_compression/depth_throttle" 
+         type="camera_compression::DepthThrottleNodelet" 
+         base_class_type="nodelet::Nodelet">
+    <description>
+      Depth throttle+decimate nodelet
+    </description>
+  </class>
+</library>
