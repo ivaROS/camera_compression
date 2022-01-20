@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   image_transport
   message_filters
+  nav_msgs
   nodelet
   geometry_msgs
   std_msgs
