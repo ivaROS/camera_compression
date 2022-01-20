@@ -1,0 +1,7 @@
+<launch>
+
+  <node name="rgbd_throttler" pkg="nodelet" type="nodelet" args="standalone camera_compression/rgbd_throttle">
+    <param name="rgbd/image_in" value="/camera/rgb/image_raw"/>
+    <param name="rgbd/camera_info_in" value="/camera/rgb/camera_info"/>
+    <param name="depth/image_in" value="/camera/depth/image_raw"/>
+    <param name="depth/camera_info_in" value="/camera/depth/camera_info"/>

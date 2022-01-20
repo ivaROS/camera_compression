@@ -1,0 +1,21 @@
+<launch>
+
+  <arg name="orig_image_in" default="/camera/depth/image_raw"/>
+  <arg name="orig_info_in" default="/camera/depth/camera_info"/>
+  
+  <arg name="proc_image_in" default="/camera/depth_p/image_raw"/>
+  <arg name="proc_info_in" default="/camera/depth_p/camera_info"/>
+  
+
+  <node name="image_processing_timing_node" pkg="camera_compression" type="image_processing_timing" output="screen">
+    <remap from="/orig_image_in" to="$(arg orig_image_in)" />
+    <remap from="/orig_info_in" to="$(arg orig_info_in)" />
+    
+    <remap from="/proc_image_in" to="$(arg proc_image_in)" />
+    <remap from="/proc_info_in" to="$(arg proc_info_in)" />
+    
+
+  </node>
+
+  
+</launch>

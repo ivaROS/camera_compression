@@ -1,0 +1,19 @@
+<launch>
+
+    <!-- gdb -ex run - -args -->
+     <node pkg="nodelet" type="nodelet" name="test_decimate" args="standalone camera_compression/rgbd_throttle" output="screen" launch-prefix="">
+      <param name="rate" type="double" value="0"/>
+      <param name="decimation" type="int" value="2"/>
+
+      <remap from="rgb/image_in"       to="camera/rgb/image_raw"/>
+      <remap from="rgb/camera_info_in" to="camera/rgb/camera_info"/>
+      <remap from="depth/image_in"     to="camera/depth/image_raw"/>
+      <remap from="depth/camera_info_in"     to="camera/depth/camera_info"/>
+
+      <remap from="rgb/image_out"       to="camera/rgb_throttled/image_raw"/>
+      <remap from="rgb/camera_info_out" to="camera/rgb_throttled/camera_info"/>
+      <remap from="depth/image_out"     to="camera/depth_throttled/image_raw"/>
+      <remap from ="depth/camera_info_out" to="camera/depth_throttled/camera_info"/>
+    </node>
+    
+</launch>
